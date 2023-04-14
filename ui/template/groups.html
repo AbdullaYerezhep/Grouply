@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a4c05f9bf6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <title>groupie-tracker</title>
+</head>
+<body>
+    <header>
+        <section class="nav nav-groups">
+            <div class="nav-menu">
+                <div class='logo'>
+                    <img src="/assets/wave.png" alt="Logo">
+                </div>
+                <ul class="nav-bar">
+                    <li><a href="/"><b>Home</b></a></li>
+                    <li><a href="/groups"><b>Groups</b></a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="https:/github.com/AbdullaYerezhep/groupie-tracker">Git</a></li>
+                </ul>
+            </div>
+            <form class="search-bar__form" action="/search/" id="search" method="get" autocomplete="off">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search-input" class="search-bar__input" id="search-input" placeholder="Search..." autocomplete="off">
+                <div class="clearBtn">
+                    <i id="clear-input-search" class="fa-solid fa-x"></i>
+                </div>
+                <div id="suggestion-bar-search">
+                </div>
+            </form>
+            <div class="dropdown-menu">
+                <button class="dropdown-btn" id="dropdown-btn">
+                    Filters:
+                    <i class="fa fa-caret-down"></i>
+                </button>   
+                <div class="dropdown-content" id="dropdown-content">
+                    <form action="/filter/" method="get" class="filter">
+                        <label>Filter by creation date:</label>
+                        <br>
+                        <input class="input-range" type="range" name="creation_after" min="1950" max="2022" step="1" value="1950" oninput="this.nextElementSibling.value = this.value"/><output>1950</output>
+                        <label>to</label>
+                        <input class="input-range" type="range" name="creation_before" min="1951" max="2023" value="2023" step="1" oninput="this.nextElementSibling.value = this.value"/><output>2023</output>
+                        <br>
+                        <br>
+                        <label>Filter by first album date:</label>
+                        <br>
+                        <input class="input-range" type="range" name="first_album_after" min="1950" max="2022" value="1950" step="1" oninput="this.nextElementSibling.value = this.value"/><output>1950</output>
+                        <label>to</label>
+                        <input class="input-range" type="range" name="first_album_before" min="1951" max="2023" value="2023" step="1" oninput="this.nextElementSibling.value = this.value"/><output>2023</output>
+                        <br>
+                        <br>
+                        <label>Filter by number of members:</label>
+                        <br>
+                        <input type="checkbox" name="member" value="1"> 1<br>
+                        <input type="checkbox" name="member" value="2"> 2<br>
+                        <input type="checkbox" name="member" value="3"> 3<br>
+                        <input type="checkbox" name="member" value="4"> 4<br>
+                        <input type="checkbox" name="member" value="5"> 5<br>
+                        <input type="checkbox" name="member" value="6"> 6<br>
+                        <input type="checkbox" name="member" value="7"> 7<br>
+                        <input type="checkbox" name="member" value="8"> 8<br>
+                        <br>
+                        <br>
+                        <label>Filter by locations of concerts:</label>
+                        <br>
+                        <div id="filter__form">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input id="location-input" type="search" name="location">
+                            <i id="clear-input-filter" class="fa-solid fa-x"></i>
+                        </div>
+                        <div id="suggestion-bar-filter">
+                        </div>
+                        <br>
+                        <input class="dropdown-submit" type="submit" value="Apply Filters">
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </header>
+    <div class="columns">
+        <div class="groups-menu">
+            <div class="groups">
+                {{range .}}
+                <div class="group" id="{{.Id}}">
+                    <img src="{{.Image}}" alt="Image">
+                    <h4 class="name" id="{{.Id}}">{{.Name}}</h3>
+                    </div>
+                {{end}}
+            </div>
+            <button class="hide-groups"><</button>
+        </div>
+        <div class="popups" id="popups">
+            {{range .}}
+            <div class="popup" id="{{.Id}}-popup">
+                    <div class="group-image">
+                        <img src="{{.Image}}" alt="Image">
+                        <h1>{{.Name}}</h1>
+                    </div>
+                    <div class="group-details">
+                            <div class="creation-date">
+                                <h3>Creation Date:</h3>
+                                <p class="creation-date">{{.CreationDate}}</p>
+                            </div>
+                            <div class="concert-dates">
+                                <h3 class="concert-title">Concerts:</h3>
+                                <ul class="concert-list">
+                                    {{range $location, $dates := .Event.DatesLocations}}
+                                    <li class="location">{{$location}}:
+                                        <ul>
+                                            {{range $date := $dates}}
+                                            <li>{{$date}}</li>
+                                            {{end}}
+                                        </ul>
+                                    </li>
+                                    {{end}}
+                                </ul>
+                            </div>
+                            <div class="first-album">
+                                <h3 class="member-title">First Album:</h3>
+                                <p>{{.FirstAlbum}}</p>
+                            </div>
+                            <div class="members">
+                                <h3 class="member-title">Members:</h3>
+                                <ul class="member-list">
+                                    {{range $member := .Members}}
+                                    <li class="member">{{$member}}</li>
+                                    {{end}}
+                                </ul>
+                            </div>
+                    </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+    
+    <footer> Copyright © 2023 Creata21. </br
+        > All rights reserved.</footer>
+    <script>
+    let dropdownContent = document.getElementById("dropdown-content");
+
+    dropdownContent.style.display = "none";
+    document.getElementById("dropdown-btn").addEventListener("click", function() {
+         if (dropdownContent.style.display === "none") {
+             dropdownContent.style.display = "block";
+         } else {
+             dropdownContent.style.display = "none";
+         }
+     });
+
+
+    const groupList = document.getElementsByClassName('group');
+    for (let i = 0; i < groupList.length; i++) {
+        groupList[i].addEventListener('click', function() {
+            const popupId = groupList[i].id + '-popup';
+            const popup = document.getElementById(popupId);
+            popup.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+
+    let popups = document.querySelector(".popups")
+    let allPopups = popups.querySelectorAll(".popup")
+    let suggestionsSearch = []
+    let suggestionsFilter = []
+
+    function eliminateDuplicates(arr) {
+        return arr.filter((element, index) => {
+        return arr.indexOf(element) === index;
+        });
+    }
+    allPopups.forEach(pop => {
+        let locations = pop.querySelectorAll(".location")
+        locations.forEach(location => {
+            locationValue = location.innerText
+            firstLocationValue = locationValue.split(' ')[0]
+            suggestionsFilter.push(locationValue.split(':')[0])
+        })
+    });
+    suggestionsFilter = eliminateDuplicates(suggestionsFilter)
+
+    allPopups.forEach(pop => {
+        let name = pop.querySelector(".group-image").innerText + " - name"
+        let fullDate = pop.querySelector(".creation-date").innerText
+        let creationDate = fullDate.slice(15) + " - " + name
+        let members = pop.querySelectorAll(".member")
+        let locations = pop.querySelectorAll(".location")
+        suggestionsSearch.push(name)
+        suggestionsSearch.push(creationDate)
+        members.forEach(member => {
+            suggestionsSearch.push(member.innerText + " - member")
+        })
+        locations.forEach(location => {
+            locationValue = location.innerText
+            suggestionsSearch.push(locationValue.split(' ')[0] + " - " + name)
+        })
+    })
+    suggestionsSearch = eliminateDuplicates(suggestionsSearch)
+
+    let inputFilter = document.getElementById("location-input")
+    let formFilter = document.getElementById("filter__form")
+    let listFilter = document.getElementById("suggestion-bar-filter")
+    let clearBtnFilter = document.getElementById("clear-input-filter")
+
+    let inputSearch = document.getElementById("search-input");
+    let formSearch = document.getElementById("search")
+    let listSearch = document.getElementById("suggestion-bar-search");
+    let clearBtnSearch = document.getElementById("clear-input-search")
+
+    function getSuggestions(suggestions, form, list, input, clear) {
+        const inputValue = input.value.toLowerCase();
+        const filteredSuggestions = suggestions.filter((suggestion) =>
+        suggestion.toLowerCase().includes(inputValue)
+        );
+
+    if (inputValue === '') {
+        list.innerHTML = '';
+        form.classList.remove("radius-search")
+        return; 
+    }
+    list.innerHTML = "";
+    filteredSuggestions.forEach((suggestion) => {
+    const li = document.createElement("div");
+    li.textContent = suggestion;
+    li.style.listStyle = "none";
+    li.style.color = "rgb(26, 41, 54)";
+    li.style.backgroundColor="white";
+    li.style.border = "1px solid white";
+    li.style.padding = "5px"
+    li.style.cursor = "pointer"
+    li.style.backgroundColor = 
+    list.appendChild(li);
+    li.addEventListener("click",() => {
+        input.value = suggestion.split(' ')[0];
+        list.innerHTML = '';
+        form.classList.remove("radius-search")
+        })
+    });
+    clear.addEventListener("click", () => {
+        input.value = '';
+        list.innerHTML = '';
+        form.classList.remove("radius-search")
+        return
+    })
+    if (list.innerHTML !== '') {
+        form.classList.add("radius-search")
+    }
+    }
+
+
+    inputSearch.addEventListener("input",  () => {
+        getSuggestions(suggestionsSearch, formSearch, listSearch, inputSearch, clearBtnSearch)
+    });
+
+    inputSearch.addEventListener("click", () => {
+        formSearch.style.borderColor = "#d78533"
+    })
+
+    document.addEventListener('click', (event) => {
+    const isClickedOutside = !formSearch.contains(event.target);
+        if (isClickedOutside) {
+            formSearch.style.borderColor = '';
+        }
+    });
+
+    inputFilter.addEventListener("input", () => {
+        getSuggestions(suggestionsFilter, formFilter, listFilter, inputFilter, clearBtnFilter)
+    })
+
+    hideGroupsBtn = document.querySelector(".hide-groups")
+    isGroupsVisible = true
+    groups = document.querySelector(".groups")
+    columns = document.querySelector(".columns")
+    hideGroupsBtn.addEventListener("click", () => {
+        isGroupsVisible = !isGroupsVisible
+        if (isGroupsVisible === true) {
+            groups.style.display = ""
+            columns.style.gridTemplateColumns = "1fr 3fr";
+            hideGroupsBtn.style.left = "25%"
+            hideGroupsBtn.innerText = "<"
+        }else{
+            groups.style.display = "none"
+            columns.style.gridTemplateColumns = "0fr 1fr"
+            hideGroupsBtn.style.left = "0"
+            hideGroupsBtn.innerText = ">"
+        }
+    })
+
+    
+    </script>
+</body>
+</html>
