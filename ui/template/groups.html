@@ -303,7 +303,13 @@
             }else {
                 navBar.style.display = "flex"
             }
+    }
+
+    document.addEventListener("DOMContentLoaded", () =>{
+        if (allPopups.length === 0 || groupList.length === 0) {
+            alert("According to your request, nothing was found")
         }
+    })
     </script>
 </body>
 </html>
