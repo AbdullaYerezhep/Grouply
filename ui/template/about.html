@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/about.css">
+    <script src="https://kit.fontawesome.com/a4c05f9bf6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/about.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
@@ -12,6 +13,9 @@
 </head>
 <body>
     <header>
+        <a href="javascript:void(0);" class="icon" onclick="showHamburger()">
+            <i class="fa fa-bars fa-3x"></i>
+        </a>
         <section class="nav nav-about">
             <div class='logo'>
                 <img src="/assets/wave.png" alt="Logo">
@@ -45,17 +49,28 @@
                 <li>Dates: displays the last and/or upcoming concert dates.</li>
                 <li>Dates: displays the last and/or upcoming concert dates.</li>
             </ol>
-
             <p>
                 Additionally, the website features a search function that provides suggestions as users type in a query. Users can also filter the results based on the creation date, first album date, locations of concerts, and number of members.<br></br>
                 With these added features, Groupie-Tracker offers an even more robust way for people to explore and discover their favorite bands and artists.</br>
                 You can check out source code of the project by clicking "Git" section on navigation panel above or by clicking <a href="https:/github.com/AbdullaYerezhep/groupie-tracker">here.</a>
             </p>
-            
         </div>
         <div class="about__img"></div>
     </section>
     <footer> Copyright © 2023 Creata21. </br
         > All rights reserved.</footer>
+        <script>
+            function showHamburger() {
+                navBar = document.querySelector(".nav")
+                if (navBar.style.display === "flex") {
+                    navBar.style.display = "none"
+                }else {
+                    navBar.style.display = "flex"
+                }
+            }
+            // document.addEventListener("resize", () =>{
+            //     console.log("ds")
+            // })
+         </script>
 </body>
 </html>

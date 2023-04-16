@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a4c05f9bf6.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
@@ -13,6 +13,9 @@
 </head>
 <body>
     <header>
+        <a href="javascript:void(0);" class="icon" onclick="showHamburger()">
+            <i class="fa fa-bars fa-3x"></i>
+        </a>
         <section class="nav nav-groups">
             <div class="nav-menu">
                 <div class='logo'>
@@ -73,8 +76,8 @@
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <input id="location-input" type="search" name="location">
                             <i id="clear-input-filter" class="fa-solid fa-x"></i>
-                        </div>
-                        <div id="suggestion-bar-filter">
+                            <div id="suggestion-bar-filter">
+                            </div>
                         </div>
                         <br>
                         <input class="dropdown-submit" type="submit" value="Apply Filters">
@@ -240,6 +243,7 @@
         input.value = suggestion.split(' ')[0];
         list.innerHTML = '';
         form.classList.remove("radius-search")
+        form.submit()
         })
     });
     clear.addEventListener("click", () => {
@@ -292,7 +296,14 @@
         }
     })
 
-    
+    function showHamburger() {
+            navBar = document.querySelector(".nav")
+            if (navBar.style.display === "flex") {
+                navBar.style.display = "none"
+            }else {
+                navBar.style.display = "flex"
+            }
+        }
     </script>
 </body>
 </html>

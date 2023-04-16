@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a4c05f9bf6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    
+    <title>groupie-tracker</title>
+</head>
+<body>
+    <header>
+        <a href="javascript:void(0);" class="icon" onclick="showHamburger()">
+            <i class="fa fa-bars fa-3x"></i>
+        </a>
+        <section class="nav nav-home">
+            <div class='logo'>
+                <img src="/assets/wave.png" alt="Logo">
+            </div>
+            <ul class="nav-bar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/groups/"><b>Groups</b></a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="https:/github.com/AbdullaYerezhep/groupie-tracker">Git</a></li>
+            </ul>
+        </section>
+    </header>
+    <section class="main">
+        <div class="home-page">
+            <div class="home-page__text">
+                <h1>Welcome to Groupie-Tracker App!</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis laborum ad optio aut corporis, labore quam libero reiciendis recusandae error quidem expedita vel aliquam pariatur iusto natus corrupti vitae delectus!</p>
+            </div>
+            <div class="home-page__img">
+                <!-- <img class="img" src="/assets/rod-long-YLtf9KqA4h0-unsplash.jpg" alt="band"> -->
+            </div>
+        </div>
+    </section>
+   <footer> Copyright © 2023 Creata21. </br>
+     All rights reserved.</footer>
+     <script>
+        function showHamburger() {
+            navBar = document.querySelector(".nav")
+            if (navBar.style.display === "flex") {
+                navBar.style.display = "none"
+            }else {
+                navBar.style.display = "flex"
+            }
+        }
+        // document.addEventListener("resize", () =>{
+        //     console.log("ds")
+        // })
+     </script>
+</body>
+</html>                   
