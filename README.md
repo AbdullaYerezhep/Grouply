@@ -3,17 +3,17 @@
 
 Groupie Tracker Visualizations consists on letting the user filter the artists/bands that will be shown with responsive and user-friendly design. So the focus of this project is to stylize it with golden rules of design.
 
- ### Project must incorporate at least these four filters:
+ ### Groupie tracker visualizations consists of manipulating the data coming from the API and displaying it in the most presentable way possible. The Schneiderman's 8 Golden Rules of Interface Design must be followed:
 
- - filter by creation date
- - filter by first album date
- - filter by number of members
- - filter by locations of concerts
+ - Strive for consistency
+ - Enable frequent users to use shortcuts
+ - Offer informative feedback
+ - Design dialogue to yield closure
+ - Offer simple error handling
+ - Permit easy reversal of actions
+ - Support internal locus of control
+ - Reduce short-term memory load
 
- ### Filters must be of at least these two types:
-
- - a range filter (filters the results between two values)
- - a check box filter (filters the results by one or multiple selection)
 
 ## Allowed packages
 
@@ -21,11 +21,9 @@ Groupie Tracker Visualizations consists on letting the user filter the artists/b
 
 ### This project will help you learn about:
 
- - Manipulation, display and storage of data
- - Event creation and display
- - JSON files and format
- - Go routines
-
+ - The basics of human-computer interface.
+ - The basics of CSS.
+ - Linking CSS and HTML.
 
 ## Usage
  - go run main.go
