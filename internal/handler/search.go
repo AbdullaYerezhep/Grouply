@@ -26,29 +26,43 @@ func SearchArtists(w http.ResponseWriter, r *http.Request) {
 	var results []models.Artist
 	if query != "" {
 		for _, artist := range artists {
+			contains := false
 			if strings.Contains(strings.ToLower(artist.Name), query) {
 				results = append(results, artist)
+				continue
 			}
 
 			for _, member := range artist.Members {
 				if strings.Contains(strings.ToLower(member), query) {
 					results = append(results, artist)
+					contains = true
 					break
 				}
+			}
+			if contains {
+				continue
 			}
 
 			for location, date := range artist.Event.DatesLocations {
 				locationString := location + ":" + date[0]
 				if strings.Contains(strings.ToLower(locationString), query) {
 					results = append(results, artist)
+					contains = true
+					break
 				}
+			}
+			
+			if contains {
+				continue
 			}
 
 			if strings.Contains(strings.ToLower(artist.FirstAlbum), query) {
 				results = append(results, artist)
+				continue
 			}
 			if strconv.Itoa(artist.CreationDate) == query {
 				results = append(results, artist)
+				continue
 			}
 		}
 	}

@@ -669,7 +669,7 @@
     }
     
     .popup {
-      height: fit-content;
+      height: 100vh;
       padding-left: 10px;
       background-color: #ffffff;
       border: 0.5px solid grey;
